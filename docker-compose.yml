@@ -1,0 +1,30 @@
+#mysql:
+#  image: mysql
+#  ports:
+#    - "3307:3307"
+#  expose:
+#    - "3307"
+#  environment:
+#    - MYSQL_USER=springuser
+#    - MYSQL_PASSWORD=ThePassword
+#    - MYSQL_DATABASE=db_example
+#    - MYSQL_ROOT_PASSWORD=root
+#  volumes:
+#    - "./conf.d:/etc/mysql/conf.d:ro"
+version: '3'
+services:
+  db:
+    image: mysql:0.0.1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bklock
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - 3307:3307
+  myapp:
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
